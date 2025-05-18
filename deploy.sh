@@ -1,5 +1,5 @@
 set -e
-APP_NAME='ittihad-web'
+APP_NAME='my-app'
 
 if [[ $# -eq 0 ]]; then
     ENV='dev'
@@ -25,4 +25,4 @@ yarn build
 echo -e '\n[Running \e[1;34m'$APP_NAME'\e[0m in\e[1;32m' $ENV '\e[0m environment]'
 pm2 stop $APP_NAME
 pm2 delete $APP_NAME
-pm2 start yarn --time --name $APP_NAME -- start:
+pm2 start yarn --time --name $APP_NAME -- start
