@@ -1,7 +1,7 @@
-'use client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import React, { useEffect, useState } from "react";
 import {
   FieldContainer,
   StyledInputField,
@@ -9,18 +9,18 @@ import {
   InputContainer,
   StyledMessage,
   StyledLabel,
-} from './styled';
+} from "./styled";
 
 type Props = {
   name: string;
   label: string;
-  caption: string | undefined;
+  caption?: string | undefined;
   type: string;
   shouldClear: boolean;
   formUtils: {
-    register: UseFormRegister<FieldValues>;
-    errors: object[];
-    clearErrors: UseFormRegister<FieldValues>;
+    register: any;
+    errors: any;
+    clearErrors: any;
   };
 };
 
@@ -31,13 +31,13 @@ const InputField = ({
   type,
   shouldClear,
   formUtils,
-}: Props): React$Element<any> => {
+}: Props) => {
   const { register, errors, clearErrors } = formUtils;
 
   const hasError = !!errors?.[name];
   const message = errors?.[name]?.message;
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
 
   const onChangeHandler = (event: any) => {
@@ -46,7 +46,7 @@ const InputField = ({
     setIsEmpty(!inputVal);
     setValue(inputVal);
 
-    if (inputVal !== '') {
+    if (inputVal !== "") {
       clearErrors(name);
     }
   };
@@ -54,7 +54,7 @@ const InputField = ({
   useEffect(() => {
     if (shouldClear) {
       setIsEmpty(true);
-      setValue('');
+      setValue("");
     }
   }, [shouldClear]);
 

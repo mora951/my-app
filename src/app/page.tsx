@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { ThemeProvider } from 'styled-components';
-import { Bars } from 'react-loader-spinner';
+import React, { useState } from "react";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ThemeProvider } from "styled-components";
+import { Bars } from "react-loader-spinner";
 
-import styles from './page.module.css';
-import InputField from '@/components/InputField';
-import { alphaNumericExp } from '@/config/regex';
+import styles from "./page.module.css";
+import InputField from "@/components/InputField";
+import { alphaNumericExp } from "@/config/regex";
 import {
   INVALID_FORMAT,
   PASSWORD,
@@ -17,9 +17,9 @@ import {
   SIGN_IN,
   SIGN_IN_SUCCESSFUL,
   USERNAME,
-} from '@/config/strings';
-import defaultTheme from '@/styles/default-theme';
-import signInApi from '@/api/account/signIn';
+} from "@/config/strings";
+import defaultTheme from "@/styles/default-theme";
+import signInApi from "@/api/account/signIn";
 import {
   Overlay,
   SuccessfulMessageContainer,
@@ -27,23 +27,26 @@ import {
   Icon,
   InnerContainer,
   IconWrapper,
-} from './styled';
+} from "./styled";
 
 type FieldValues = { username: string; password: string };
 
 const schema = yup.object().shape({
-  username: yup.string().matches(alphaNumericExp, INVALID_FORMAT).required(REQURIED_FIELD),
+  username: yup
+    .string()
+    .matches(alphaNumericExp, INVALID_FORMAT)
+    .required(REQURIED_FIELD),
   password: yup.string().required(REQURIED_FIELD),
 });
 
-const SignInPage = (): React$Element<any> => {
+const SignInPage = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     clearErrors,
     setValue,
-  } = useForm<FieldValues>({ mode: 'all', resolver: yupResolver(schema) });
+  } = useForm<FieldValues>({ mode: "all", resolver: yupResolver(schema) });
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
@@ -62,9 +65,10 @@ const SignInPage = (): React$Element<any> => {
         setIsSuccessful(true);
         setShouldClear(true);
         setTimeout(() => setShouldClear(false), 300);
-        setValue('username', undefined);
-        setValue('password', undefined);
+        setValue("username", '');
+        setValue("password", '');
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
       setIsLoading(false);
@@ -100,7 +104,13 @@ const SignInPage = (): React$Element<any> => {
 
         {isLoading && (
           <Overlay>
-            <Bars height="80" width="80" radius="9" color="blue" ariaLabel="loading" />
+            <Bars
+              height="80"
+              width="80"
+              // radius="9"
+              color="blue"
+              ariaLabel="loading"
+            />
           </Overlay>
         )}
 
